@@ -1,0 +1,38 @@
+@model List<MyProject.ViewModel.TaskIndexView>
+<input type="hidden" value ="@ViewBag.Message" name="message" id="message"class="form-control" />
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Task Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Action</th>
+
+    </tr>
+  </thead>
+  <tbody>
+     
+    @foreach (var item in Model)
+    {
+       
+              <tr>
+      <td>@item.TaskName</td>
+      <td>@item.Description</td>
+      <td>@item.CreatedAt</td>
+  
+        <td><a class="btn btn-primary" asp-controller="Task" asp-action="Assign" asp-route-id="@item.TaskId">Assign</a></td>
+        <td><a class="btn btn-primary" asp-controller="Task" asp-action="Update"  asp-route-id="@item.TaskId">Update</a></td>
+        <td><a class="btn btn-danger delete" asp-controller="Task" asp-action="Delete" asp-route-id="@item.TaskId" data-body-message="Are You Sure Want To Delete ">Delete</a></td>
+
+
+      </tr>
+        
+      
+    }
+    
+     
+    
+  
+  </tbody>
+</table>

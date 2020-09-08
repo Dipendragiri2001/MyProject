@@ -1,0 +1,41 @@
+@model List<MyProject.Models.Task>
+<input type="hidden" value ="@ViewBag.Message" name="message" id="message"class="form-control" />
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Task Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Status</th>
+
+    </tr>
+  </thead>
+  <tbody>
+     
+    @foreach (var item in Model)
+    {
+       
+              <tr>
+      <td>@item.TaskName</td>
+      <td>@item.Description</td>
+      <td>@item.CreatedAt</td>
+      @if (@item.isCompleted==false)
+      {
+          <td> Not Completed</td>
+        <td><a class="btn btn-primary" asp-controller="Task" asp-action="Completed" asp-route-id="@item.Id">Done</a></td>
+
+      }else{
+          <td> Completed At @item.CompletedAt.ToShortDateString()</td>
+        }
+         <td><a class="btn btn-danger delete" asp-controller="Task" asp-action="Delete" asp-route-id="@item.Id" data-body-message="Are You Sure Want To Delete ">Delete</a></td>
+
+
+      </tr>
+        }
+      
+    
+    
+  
+  </tbody>
+</table>
